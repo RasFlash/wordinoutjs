@@ -12,17 +12,17 @@ Inspireted me: npmjs.org
 How to use
 =========
 **Add to HTML's head:**
-'''html
+```html
 <script type="text/javascript" src='/wordsoutin.js'></script>
-'''
+```
 
 **Create an element to body:**
-'''html
+```html
 <h1 id='element'></h1
-'''
+```
 
 **Create to body's end script and write into this code:**
-'''javascript
+```javascript
 var element=document.getElementById('element');
 var words=['JavaScript', 'PHP', 'MySQL'];
 var delay=100; //how many milliseconds waiting two words write or delete between
@@ -30,4 +30,4 @@ var inWait=300; //you can add that how many milliseconds wait after a word write
 var stop=true; //if true then timer will stop after write last word but if false then timer won't stop
 
 var WOI = new WordsOutIn(element, words, delay, inWait, stop);
-'''
+```

@@ -29,5 +29,5 @@ var delay=100; //how many milliseconds waiting two words write or delete between
 var inWait=300; //you can add that how many milliseconds wait after a word writed
 var stop=true; //if true then timer will stop after write last word but if false then timer won't stop
 
-var WOI = new WordsOutIn(element, words, delay, inWait, stop);
+var WOI = new WordsOutIn(element, words, delay, inWait, stop); //call this object and running :)
 ```

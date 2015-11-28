@@ -1,4 +1,4 @@
-function WordsOutIn(where, words, delay, inWait, stop){
+unction WordsOutIn(where, words, delay, inWait, stop){
     //options start
     this.words=words || ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten']; //words what will write
     this.delay=delay || 200; //how many milliseconds waiting two words write or delete between

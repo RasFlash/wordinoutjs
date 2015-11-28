@@ -18,7 +18,7 @@ How to use
 
 **Create an element to body:**
 ```html
-<h1 id='element'></h1
+<h1 id='element'></h1>
 ```
 
 **Create to body's end script and write into this code:**

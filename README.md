@@ -21,7 +21,7 @@ How to use
 <h1 id='element'></h1>
 ```
 
-**Create to body's end script and write into this code:**
+**Create script tag to body's end and write this code:**
 ```javascript
 var element=document.getElementById('element');
 var words=['JavaScript', 'PHP', 'MySQL'];

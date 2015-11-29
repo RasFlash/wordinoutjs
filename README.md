@@ -13,7 +13,7 @@ How to use
 =========
 **Add to HTML's head:**
 ```html
-<script type="text/javascript" src='/wordsoutin.js'></script>
+<script type="text/javascript" src='/wordsoutin.min.js'></script>
 ```
 
 **Create an element to body:**

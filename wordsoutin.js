@@ -12,7 +12,7 @@ function WordsOutIn(where, words, delay, inWait, stop){
     //options start
     this.words=words || ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten']; //words what will write
     this.delay=delay || 200; //how many milliseconds waiting two words write or delete between
-    this.inWait=Math.round(inWait/delay) || 0; //if writed then how many milliseconds waititing
+    this.inWait=inWait || 0; //if writed then how many steps waiting
     this.where=where; //where will write
     this.stop=stop || false; //if true then timer will stop after write last word but if false then timer won't stop
     //options stop

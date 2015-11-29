@@ -53,7 +53,7 @@ function inTimer(where, words, inWait, stop){
             element += words[db][element.length];
             is = true;
 
-            if(inWait==0) wait++;
+            if(inWait!=0) wait++;
             else if(this.stop){
                 if(wordCounter<words.length-1) wordCounter++;
                 else clearInterval(timer);

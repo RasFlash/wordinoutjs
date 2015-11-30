@@ -1,7 +1,7 @@
 This write any words from array to screen and you need just one single line on JavaScript code. 
 Inspireted me: [npmjs website](https://www.npmjs.org/) that my friend showed to me.
 
-###Tested in desktop:
+###Tested in:
 - Firefox
 - Chrome
 - Opera

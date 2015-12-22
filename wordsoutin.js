@@ -22,6 +22,10 @@ function WordsOutIn(where, words, delay, inWait, stop){
     var timer=setInterval(function(){
         where.innerHTML=base.doing(timer);
     }, this.delay);
+
+    this.stopping=function() {
+        base.stopping(timer);
+    }
 }
 
 function inTimer(where, words, inWait, stop){
@@ -33,6 +37,10 @@ function inTimer(where, words, inWait, stop){
     this.words=words;
     this.inWait=inWait;
     this.stop=stop;
+
+    this.stopping=function(timer) {
+        clearInterval(timer);
+    };
 
     this.doing=function(timer){
         var wordCounter=this.wordCounter,
@@ -53,10 +61,10 @@ function inTimer(where, words, inWait, stop){
             element += words[db][element.length];
             is = true;
 
-            if(inWait==0) wait++;
+            if(inWait!=0) wait++;
             else if(this.stop){
                 if(wordCounter<words.length-1) wordCounter++;
-                else clearInterval(timer);
+                else this.stopping(timer);
             }
         }
         else if(wait > 0){
@@ -66,7 +74,7 @@ function inTimer(where, words, inWait, stop){
 
                 if(this.stop){
                     if(wordCounter < words.length - 1) wordCounter++;
-                    else clearInterval(timer)
+                    else this.stopping(timer)
                 }
             }
         }

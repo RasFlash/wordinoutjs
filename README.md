@@ -7,7 +7,8 @@ Inspireted me: [npmjs website](https://www.npmjs.org/) that my friend showed to 
 - Opera
 - Edge
 - Safari (in Windows)
-- I will test on mobile
+- Windows Phone 8.1 Explorer
+- Chrome in Android
 
 How to use
 =========

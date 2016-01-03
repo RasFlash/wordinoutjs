@@ -1,13 +1,16 @@
 This write any words from array to screen and you need just one single line on JavaScript code. 
 Inspireted me: [npmjs website](https://www.npmjs.org/) that my friend showed to me.
 
+[Check it, try it](http://molnarland.github.io/)
+
 ###Tested in:
 - Firefox
 - Chrome
 - Opera
 - Edge
 - Safari (in Windows)
-- I will test on mobile
+- Windows Phone 8.1 Explorer
+- Chrome in Android, Android Browser
 
 How to use
 =========

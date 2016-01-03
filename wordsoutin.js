@@ -28,8 +28,11 @@ function WordsOutIn(where, words, delay, inWait, stop)
     }, this.delay[0][0]);
 
 
-    this.stopping=function()
-    {
+    var timer=setInterval(function(){
+        where.innerHTML=base.doing(timer);
+    }, this.delay);
+
+    this.stopping=function() {
         base.stopping(timer);
     }
 }
@@ -45,12 +48,20 @@ function inTimer(where, words, inWait, stop)
     this.inWait=inWait;
     this.stop=stop;
 
+<<<<<<< HEAD
     this.stopping=function(timer)
     {
         clearInterval(timer);
     };
 
     this.doing=function(timer, delay){
+=======
+    this.stopping=function(timer) {
+        clearInterval(timer);
+    };
+
+    this.doing=function(timer){
+>>>>>>> origin/master
         var wordCounter=this.wordCounter,
             db=this.db,
             wait=this.wait,
@@ -74,7 +85,7 @@ function inTimer(where, words, inWait, stop)
 
             if(inWait!=0) wait++;
             else if(this.stop){
-                if(wordCounter < words.length-1) wordCounter++;
+                if(wordCounter<words.length-1) wordCounter++;
                 else this.stopping(timer);
             }
         }

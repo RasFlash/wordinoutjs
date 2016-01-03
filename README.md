@@ -1,7 +1,7 @@
 This write any words from array to screen and you need just one single line on JavaScript code. 
 Inspireted me: [npmjs website](https://www.npmjs.org/) that my friend showed to me.
 
-###Tested in desktop:
+###Tested in:
 - Firefox
 - Chrome
 - Opera
@@ -26,7 +26,7 @@ How to use
 var element=document.getElementById('element');
 var words=['JavaScript', 'PHP', 'MySQL'];
 var delay=100; //how many milliseconds waiting two words write or delete between
-var inWait=300; //you can add that how many milliseconds wait after a word writed
+var inWait=3; //you can add that how many step wait after a word writed (delay*inWait=how many milliseconds wait, so 100*3=300 ms wait)
 var stop=true; //if true then timer will stop after write last word but if false then timer won't stop
 
 var WOI = new WordsOutIn(element, words, delay, inWait, stop); //call this object and running :)

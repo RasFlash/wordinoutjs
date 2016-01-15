@@ -48,20 +48,12 @@ function inTimer(where, words, inWait, stop)
     this.inWait=inWait;
     this.stop=stop;
 
-<<<<<<< HEAD
     this.stopping=function(timer)
     {
         clearInterval(timer);
     };
 
     this.doing=function(timer, delay){
-=======
-    this.stopping=function(timer) {
-        clearInterval(timer);
-    };
-
-    this.doing=function(timer){
->>>>>>> origin/master
         var wordCounter=this.wordCounter,
             db=this.db,
             wait=this.wait,

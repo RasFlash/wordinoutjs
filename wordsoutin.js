@@ -8,44 +8,44 @@
 * Twitter: @molnarland
 *
 */
-function WordsOutIn(where, words, delay, inWait, stop)
+function WordsOutIn(where, words, delay, inWait, color, stop)
 {
     var helpers = new WOIHelpers();
 
     //options start
     this.where=where; //where will write
     this.words=words || ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten']; //words what will write
-    this.delay=delay=helpers.createDelayOrWaitArray(delay, this.words.length) || helpers.createDelayOrWaitArray(200, this.words.length); //how many milliseconds waiting two words write or delete between
-    this.inWait=inWait=helpers.createDelayOrWaitArray(inWait, this.words.length) || helpers.createDelayOrWaitArray(0, this.words.length); //if writed then how many milliseconds waiting
+    this.delay=delay=helpers.createDelayOrWaitArray(delay, this.words.length, 'number') || helpers.createDelayOrWaitArray(200, this.words.length, 'number'); //how many milliseconds waiting two words write or delete between
+    this.inWait=inWait=helpers.createDelayOrWaitArray(inWait, this.words.length, 'number') || helpers.createDelayOrWaitArray(0, this.words.length, 'number'); //if writed then how many milliseconds waiting
+    this.colors=color=helpers.createDelayOrWaitArray(color, this.words.length, 'string') || helpers.createDelayOrWaitArray(false, this.words.length, 'string');
     this.stop=stop || false; //if true then timer will stop after write last word but if false then timer won't stop
     //options stop
 
-    var base = new inTimer(this.where, this.words, this.inWait, this.stop);
+    helpers.changeFontColor(this.where, this.colors[0][0]);
+
+    var base = new inTimer(this.where, this.words, this.inWait, this.colors, this.stop);
 
     var timer = setInterval(function()
     {
         where.innerHTML=base.doing(timer, delay);
     }, this.delay[0][0]);
 
-
-    var timer=setInterval(function(){
-        where.innerHTML=base.doing(timer);
-    }, this.delay);
-
     this.stopping=function() {
         base.stopping(timer);
     }
 }
 
-function inTimer(where, words, inWait, stop)
+function inTimer(where, words, inWait, colors, stop)
 {
     this.wordCounter=0;
     this.db=0;
     this.wait=0;
     this.is=false;
+    this.where=where;
     this.element=where.innerHTML;
     this.words=words;
     this.inWait=inWait;
+    this.colors=colors;
     this.stop=stop;
 
     this.stopping=function(timer)
@@ -60,39 +60,50 @@ function inTimer(where, words, inWait, stop)
             is=this.is,
             element=this.element,
             words=this.words,
-            inWait=this.inWait;
+            inWait=this.inWait,
+            colors=this.colors,
+            helpers = new WOIHelpers();
 
-        var helpers = new WOIHelpers();
 
         if(db == words.length && !is && wait == 0){
-            db = 0;
+            db=0;
+        }
+        else if (element.length == 0 && is==null && wait == 0) {
+            timer=helpers.stopAndStartTimer(where, timer, delay, inWait[db][0], this);
+            helpers.changeFontColor(this.where, colors[db][0]);
+            wait++;
+        }
+        else if (element.length == 0 && is==null && wait > 0) {
+            if(wait >= 1){
+                wait=0;
+                is=false;
+                timer=helpers.stopAndStartTimer(where, timer, delay, delay[db][0], this);
+            }
+            else wait++;
         }
         else if(element.length < words[db].length - 1 && !is && wait == 0){
-            helpers.stopAndStartTimer(where, timer, delay, db, 0, this); 
             element += words[db][element.length];
         }
         else if(element.length == words[db].length - 1 && !is && wait == 0){
             element += words[db][element.length];
             is = true;
 
-            if(inWait!=0) wait++;
+            if(inWait[db][1]!=0){ 
+                timer=helpers.stopAndStartTimer(where, timer, delay, inWait[db][1], this);
+                helpers.changeFontColor(this.where, colors[db][1]);
+                wait++;
+            }
             else if(this.stop){
-                if(wordCounter<words.length-1) wordCounter++;
+                if(wordCounter < words.length-1) wordCounter++;
                 else this.stopping(timer);
             }
         }
         else if(wait > 0){
-            wait++;
-            if(wait >= inWait){
-                wait = 0;
-
-                helpers.stopAndStartTimer(where, timer, delay, db, 1, this); 
-
-                if(this.stop){
-                    if(wordCounter < words.length - 1) wordCounter++;
-                    else this.stopping(timer)
-                }
+            if(wait >= 1){
+                wait=0;
+                timer=helpers.stopAndStartTimer(where, timer, delay, delay[db][1], this);
             }
+            else wait++;
         }
         else if(element.length == words[db].length && is && wait == 0){
             element = element.substr(0, element.length - 1);
@@ -100,7 +111,7 @@ function inTimer(where, words, inWait, stop)
         else if(element.length < words[db].length && is && wait == 0){
             element = element.substr(0, element.length - 1);
             if(element.length == 0){
-                is = false;
+                is = null;
                 db++;
             }
         }
@@ -119,20 +130,20 @@ function inTimer(where, words, inWait, stop)
 
 function WOIHelpers ()
 {
-    this.stopAndStartTimer = function (where, timer, delay, db, zeroOrOne, object) 
+    this.stopAndStartTimer = function (where, timer, delay, time, object) 
     {
         object.stopping(timer);
         
         timer = setInterval(function()
         {
             where.innerHTML=object.doing(timer, delay);
-        }, delay[db][zeroOrOne]);
+        }, time);
     };
 
-    this.addNumbersToArray = function (array, number1, number2, start, stop)
+    this.addElementToArray = function (array, element1, element2, start, stop)
     {
         for (var cv = start; cv < stop; cv++) {
-            array[cv] = [number1, number2];
+            array[cv] = [element1, element2];
         }
 
         return array;
@@ -148,19 +159,18 @@ function WOIHelpers ()
         }
     };
 
-    this.changeNumbersInArray = function (array, arrayCount)
+    this.changeElementInArray = function (array, arrayCount, type)
     {
         for (var cv = 0; cv < arrayCount; cv++) {
-            if (typeof array[cv] === 'number') {
+            if (typeof array[cv] === type) {
                 array[cv] = [array[cv], array[cv]];
             }
             else if (Array.isArray(array[cv])) {
                 var length=array[cv].length;
-
-                if (length === 1 && typeof array[cv][0] === 'number') {
+                if (length === 1 && typeof array[cv][0] === type) {
                     array[cv] = [array[cv][0], array[cv][0]];
                 }
-                else if(length === 2 && typeof array[cv][0] === 'number' && typeof array[cv][1] === 'number'){
+                else if(length === 2 && typeof array[cv][0] === type && typeof array[cv][1] === type){
                     //code...
                 }
                 else {
@@ -173,22 +183,27 @@ function WOIHelpers ()
         return array;
     };
 
-    this.createDelayOrWaitArray = function (array, wordsLength)
+    this.createDelayOrWaitArray = function (array, wordsLength, type)
     {
-        if (typeof array === 'number') {
+        if (typeof array === type) {
             var helper = array;
             array = [];
-            array = this.addNumbersToArray(array, helper, helper, 0, wordsLength);
+            array = this.addElementToArray(array, helper, helper, 0, wordsLength);
         }
         else if (Array.isArray(array)) {
             var arrayCount = array.length;
-            this.changeNumbersInArray(array, arrayCount);
+
+            this.changeElementInArray(array, arrayCount, type);
 
             var helper = [array[array.length-1][0], array[array.length-1][1]];
-            array = this.addNumbersToArray(array, helper[0], helper[1], arrayCount, wordsLength);
+            array = this.addElementToArray(array, helper[0], helper[1], arrayCount, wordsLength);
         }
-        else throw "Delay Type Error (not array or integer)";
+        else throw "Error in WOIHelpers.createDelayOrWaitArray()";
 
         return array;
+    };
+
+    this.changeFontColor = function (where, color) {
+        if (color !== false) where.style.color=color;
     };
 }

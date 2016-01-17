@@ -23,14 +23,10 @@ function WordsOutIn(where, words, delay, inWait, color, stop)
 
     var base = new inTimer(this.where, this.words, this.inWait, this.colors, this.stop);
 
-    var timer = setInterval(function()
+    this.timer = setInterval(function()
     {
-        where.innerHTML=base.doing(timer, delay);
+        where.innerHTML=base.doing(this.timer, delay);
     }, this.delay[0][0]);
-
-    this.stopping=function() {
-        base.stopping(timer);
-    }
 }
 
 function inTimer(where, words, inWait, colors, stop)
@@ -46,10 +42,6 @@ function inTimer(where, words, inWait, colors, stop)
     this.colors=colors;
     this.stop=stop;
 
-    this.stopping=function(timer)
-    {
-        clearInterval(timer);
-    };
 
     this.doing=function(timer, delay){
         var wordCounter=this.wordCounter,
@@ -67,10 +59,10 @@ function inTimer(where, words, inWait, colors, stop)
         }
         else if (element.length == 0 && is==null && wait == 0) {
             timer=inTimer.stopAndStartTimer(where, timer, delay, inWait[db][0], this);
-            inTimer.changeFontColor(this.where, colors[db][0]);
             wait++;
         }
         else if (element.length == 0 && is==null && wait > 0) {
+            inTimer.changeFontColor(this.where, colors[db][0]);
             if(wait >= 1){
                 wait=0;
                 is=false;
@@ -87,7 +79,6 @@ function inTimer(where, words, inWait, colors, stop)
 
             if(inWait[db][1]!=0){ 
                 timer=inTimer.stopAndStartTimer(where, timer, delay, inWait[db][1], this);
-                inTimer.changeFontColor(this.where, colors[db][1]);
                 wait++;
             }
             else if(this.stop){
@@ -96,6 +87,7 @@ function inTimer(where, words, inWait, colors, stop)
             }
         }
         else if(wait > 0){
+            inTimer.changeFontColor(this.where, colors[db][1]);
             if(wait >= 1){
                 wait=0;
                 timer=inTimer.stopAndStartTimer(where, timer, delay, delay[db][1], this);
@@ -125,10 +117,14 @@ function inTimer(where, words, inWait, colors, stop)
     };
 }
 
+inTimer.stopping=function(timer)
+{
+    clearInterval(timer);
+};
 
 inTimer.stopAndStartTimer = function (where, timer, delay, time, object) 
 {
-    object.stopping(timer);
+    inTimer.stopping(timer);
     
     timer = setInterval(function()
     {
@@ -145,13 +141,13 @@ inTimer.addElementToArray = function (array, element1, element2, start, stop)
     return array;
 };
 
-inTimer.whichThrow = function (number)
+inTimer.whichThrow = function (number, array)
 {
     switch(number){
-        case 1: throw "Delay Type Error: 1st element"; break;
-        case 2: throw "Delay Type Error: 2nd element"; break;
-        case 3: throw "Delay Type Error: 3rd element"; break;
-        default: throw "Delay Type Error: "+number+"th element"; break;
+        case 1: console.error("Delay Type Error: 1st element, in: "+array); break;
+        case 2: console.error("Delay Type Error: 2nd element, in: "+array); break;
+        case 3: console.error("Delay Type Error: 3rd element, in: "+array); break;
+        default: console.error("Delay Type Error: "+number+"th element, in: "+array); break;
     }
 };
 
@@ -171,7 +167,7 @@ inTimer.changeElementInArray = function (array, arrayCount, type)
             }
             else {
                 array = 200;
-                inTimer.whichThrow(cv);
+                inTimer.whichThrow(cv, array);
             }
         }
     }
@@ -194,7 +190,7 @@ inTimer.createDelayOrWaitArray = function (array, wordsLength, type)
         var helper = [array[array.length-1][0], array[array.length-1][1]];
         array = inTimer.addElementToArray(array, helper[0], helper[1], arrayCount, wordsLength);
     }
-    else throw "Error in WOIHelpers.createDelayOrWaitArray()";
+    else console.error("Error");
 
     return array;
 };

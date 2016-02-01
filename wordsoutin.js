@@ -8,6 +8,9 @@
 * Twitter: @molnarland
 *
 */
+
+var timerId = 1;
+
 function WordsOutIn(where, words, delay, inWait, color, stop)
 {
     //options start
@@ -21,15 +24,15 @@ function WordsOutIn(where, words, delay, inWait, color, stop)
 
     inTimer.changeFontColor(this.where, this.colors[0][0]);
 
-    var base = new inTimer(this.where, this.words, this.inWait, this.colors, this.stop);
+    var base = new inTimer(this.where, this.words, this.delay, this.inWait, this.colors, this.stop);
 
-    this.timer = setInterval(function()
+    this.timer = timerId = setInterval(function()
     {
-        where.innerHTML=base.doing(this.timer, delay);
+        where.innerHTML=base.doing(timerId);
     }, this.delay[0][0]);
 }
 
-function inTimer(where, words, inWait, colors, stop)
+function inTimer(where, words, delay, inWait, colors, stop)
 {
     this.wordCounter=0;
     this.db=0;
@@ -40,10 +43,11 @@ function inTimer(where, words, inWait, colors, stop)
     this.words=words;
     this.inWait=inWait;
     this.colors=colors;
+    this.delay=delay;
     this.stop=stop;
 
 
-    this.doing=function(timer, delay){
+    this.doing=function(timer){
         var wordCounter=this.wordCounter,
             db=this.db,
             wait=this.wait,
@@ -51,22 +55,22 @@ function inTimer(where, words, inWait, colors, stop)
             element=this.element,
             words=this.words,
             inWait=this.inWait,
+            delay=this.delay,
             colors=this.colors;
-
 
         if(db == words.length && !is && wait == 0){
             db=0;
         }
         else if (element.length == 0 && is==null && wait == 0) {
-            timer=inTimer.stopAndStartTimer(where, timer, delay, inWait[db][0], this);
+            timer=inTimer.stopAndStartTimer(where, timer, inWait[db][0], this);
             wait++;
         }
         else if (element.length == 0 && is==null && wait > 0) {
             inTimer.changeFontColor(this.where, colors[db][0]);
-            if(wait >= 1){
+            if(wait >= 2){
                 wait=0;
                 is=false;
-                timer=inTimer.stopAndStartTimer(where, timer, delay, delay[db][0], this);
+                timer=inTimer.stopAndStartTimer(where, timer, delay[db][0], this);
             }
             else wait++;
         }
@@ -78,7 +82,7 @@ function inTimer(where, words, inWait, colors, stop)
             is = true;
 
             if(inWait[db][1]!=0){ 
-                timer=inTimer.stopAndStartTimer(where, timer, delay, inWait[db][1], this);
+                timer=inTimer.stopAndStartTimer(where, timer, inWait[db][1], this);
                 wait++;
             }
             else if(this.stop){
@@ -90,7 +94,7 @@ function inTimer(where, words, inWait, colors, stop)
             inTimer.changeFontColor(this.where, colors[db][1]);
             if(wait >= 1){
                 wait=0;
-                timer=inTimer.stopAndStartTimer(where, timer, delay, delay[db][1], this);
+                timer=inTimer.stopAndStartTimer(where, timer, delay[db][1], this);
             }
             else wait++;
         }
@@ -112,6 +116,7 @@ function inTimer(where, words, inWait, colors, stop)
         this.element=element;
         this.words=words;
         this.inWait=inWait;
+        this.delay=delay;
 
         return element;
     };
@@ -120,16 +125,19 @@ function inTimer(where, words, inWait, colors, stop)
 inTimer.stopping=function(timer)
 {
     clearInterval(timer);
+    return;
 };
 
-inTimer.stopAndStartTimer = function (where, timer, delay, time, object) 
+inTimer.stopAndStartTimer = function (where, timer, time, object)
 {
     inTimer.stopping(timer);
-    
-    timer = setInterval(function()
+    timer = 0;
+
+    timer = timerId = setInterval(function()
     {
-        where.innerHTML=object.doing(timer, delay);
+        where.innerHTML=object.doing(timer);
     }, time);
+
 };
 
 inTimer.addElementToArray = function (array, element1, element2, start, stop)

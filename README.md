@@ -8,7 +8,9 @@ Inspireted me: [npmjs website](https://www.npmjs.org/) that my friend showed to 
 - Chrome
 - Opera
 - Edge
+- Internet Explorer 11
 - Safari (in Windows)
+- NanoBrowser
 - Windows Phone 8.1 Explorer
 - Chrome in Android, Android Browser
 

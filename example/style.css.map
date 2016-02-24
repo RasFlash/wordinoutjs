@@ -1,1 +1,1 @@
-{"version":3,"sources":["file:///C:/Users/molnarland/Documents/GitHub/wordsOutInJS/example/style.sass","style.sass"],"names":[],"mappings":"AAAA,KACE,eAAgB,CAElB,QACE,mBACA,WACA,0BACA,iBAAkB,CAAA;ACNpB,qCAAqC","file":"style.css"}
+{"version":3,"sources":["style.sass"],"names":[],"mappings":"AAAA;EACC,yBAAyB;CAAG;;AAE7B;EACE,iBAAiB;CAAG;;AAEtB;EACE,oBAAoB;EACpB,YAAY;EACZ,2BAA2B;EAC3B,mBAAmB;CAAG;;AAKxB,qCAAqC","file":"style.css"}

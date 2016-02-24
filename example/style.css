@@ -1,2 +1,16 @@
-body{background:#000}#comeon{margin:50vh auto 0;color:#0C0;text-decoration:underline;text-align:center}
+* {
+  transition: 300ms linear;
+}
+
+body {
+  background: #000;
+}
+
+#comeon {
+  margin: 50vh auto 0;
+  color: #0C0;
+  text-decoration: underline;
+  text-align: center;
+}
+
 /*# sourceMappingURL=style.css.map */

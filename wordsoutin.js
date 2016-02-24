@@ -9,10 +9,11 @@
 *
 */
 
-var timerId = 1;
+
 
 function WordsOutIn(where, words, delay, inWait, color, stop)
 {
+
     //options start
     this.where=where; //where will write
     this.words=words || ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten']; //words what will write
@@ -22,35 +23,27 @@ function WordsOutIn(where, words, delay, inWait, color, stop)
     this.stop=stop || false; //if true then timer will stop after write last word but if false then timer won't stop
     //options stop
 
-    inTimer.prototype.changeFontColor(this.where, this.colors[0][0]);
+    this.changeFontColor(this.where, this.colors[0][0]);
 
-    var base = new inTimer(this.where, this.words, this.delay, this.inWait, this.colors, this.stop);
+    
 
-    this.timer = timerId = setInterval(function()
+    var thisObject = this,
+        timerId = this.timerId = 1; //setintervals' id 
+
+    this.timerId = timerId = setInterval(function()
     {
-        where.innerHTML=base.doing(timerId);
+        where.innerHTML=thisObject.doing(timerId);
     }, this.delay[0][0]);
-}
 
-function inTimer(where, words, delay, inWait, colors, stop)
-{
     this.wordCounter=this.db=this.wait=0;
     this.is=false;
-    this.where=where;
-    this.element=where.innerHTML;
-    this.words=words;
-    this.inWait=inWait;
-    this.colors=colors;
-    this.delay=delay;
-    this.stop=stop;
-
 
     this.doing=function(timer){
         var wordCounter=this.wordCounter,
             db=this.db,
             wait=this.wait,
             is=this.is,
-            element=this.element,
+            element=this.where.innerHTML,
             words=this.words,
             inWait=this.inWait,
             delay=this.delay,
@@ -60,7 +53,7 @@ function inTimer(where, words, delay, inWait, colors, stop)
             db=0;
         }
         else if (element.length == 0 && is==null && wait == 0) {
-            timer=this.stopAndStartTimer(where, timer, inWait[db][0], this);
+            timer=this.stopAndStartTimer(where, inWait[db][0], this);
             wait++;
         }
         else if (element.length == 0 && is==null && wait > 0) {
@@ -68,7 +61,7 @@ function inTimer(where, words, delay, inWait, colors, stop)
             if(wait >= 2){
                 wait=0;
                 is=false;
-                timer=this.stopAndStartTimer(where, timer, delay[db][0], this);
+                timer=this.stopAndStartTimer(where, delay[db][0], this);
             }
             else wait++;
         }
@@ -80,12 +73,12 @@ function inTimer(where, words, delay, inWait, colors, stop)
             is = true;
 
             if(inWait[db][1]!=0){ 
-                timer=this.stopAndStartTimer(where, timer, inWait[db][1], this);
+                timer=this.stopAndStartTimer(where, inWait[db][1], this);
                 wait++;
             }
             if(this.stop){
                 if(wordCounter < words.length-1) wordCounter++;
-                else this.stopping(timerId);
+                else this.stopping();
             }
 
         }
@@ -93,7 +86,7 @@ function inTimer(where, words, delay, inWait, colors, stop)
             this.changeFontColor(this.where, colors[db][1]);
             if(wait >= 1){
                 wait=0;
-                timer=this.stopAndStartTimer(where, timer, delay[db][1], this);
+                timer=this.stopAndStartTimer(where, delay[db][1], this);
             }
             else wait++;
         }
@@ -121,25 +114,27 @@ function inTimer(where, words, delay, inWait, colors, stop)
     };
 }
 
-inTimer.prototype.stopping=function(timer)
+
+WordsOutIn.prototype.stopping=function()
 {
-    clearInterval(timer);
+    clearInterval(this.timerId);
+    this.timerId = 0;
     return;
 };
 
-inTimer.prototype.stopAndStartTimer = function (where, timer, time, object)
+WordsOutIn.prototype.stopAndStartTimer = function (where, time, object)
 {
-    this.stopping(timer);
-    timer = 0;
+    this.stopping();
+    var timerId = this.timerId = 0;
 
-    timer = timerId = setInterval(function()
+    this.timerId = timerId = setInterval(function()
     {
-        where.innerHTML=object.doing(timer);
+        where.innerHTML=object.doing(timerId);
     }, time);
 
 };
 
-inTimer.prototype.addElementToArray = function (array, element1, element2, start, stop)
+WordsOutIn.prototype.addElementToArray = function (array, element1, element2, start, stop)
 {
     for (var cv = start; cv < stop; cv++) {
         array[cv] = [element1, element2];
@@ -148,7 +143,7 @@ inTimer.prototype.addElementToArray = function (array, element1, element2, start
     return array;
 };
 
-inTimer.prototype.whichThrow = function (number, array)
+WordsOutIn.prototype.whichThrow = function (number, array)
 {
     switch(number){
         case 1: console.error("Delay Type Error: 1st element, in: "+array); break;
@@ -158,7 +153,7 @@ inTimer.prototype.whichThrow = function (number, array)
     }
 };
 
-inTimer.prototype.changeElementInArray = function (array, arrayCount, type)
+WordsOutIn.prototype.changeElementInArray = function (array, arrayCount, type)
 {
     for (var cv = 0; cv < arrayCount; cv++) {
         if (typeof array[cv] === type) {
@@ -187,21 +182,21 @@ WordsOutIn.prototype.createDelayOrWaitArray = function (array, wordsLength, type
     if (typeof array === type) {
         var helper = array;
         array = [];
-        array = inTimer.prototype.addElementToArray(array, helper, helper, 0, wordsLength);
+        array = this.addElementToArray(array, helper, helper, 0, wordsLength);
     }
     else if (Array.isArray(array)) {
         var arrayCount = array.length;
 
-        inTimer.prototype.changeElementInArray(array, arrayCount, type);
+        this.changeElementInArray(array, arrayCount, type);
 
         var helper = [array[array.length-1][0], array[array.length-1][1]];
-        array = inTimer.prototype.addElementToArray(array, helper[0], helper[1], arrayCount, wordsLength);
+        array = this.addElementToArray(array, helper[0], helper[1], arrayCount, wordsLength);
     }
     else console.error("Error");
 
     return array;
 };
 
-inTimer.prototype.changeFontColor = function (where, color) {
+WordsOutIn.prototype.changeFontColor = function (where, color) {
     if (color !== false) where.style.color=color;
 };

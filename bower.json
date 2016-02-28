@@ -28,6 +28,10 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "prepos.cfg",
+    "example/*",
+    ".gitignore",
+    "wordsoutin.js"
   ]
 }

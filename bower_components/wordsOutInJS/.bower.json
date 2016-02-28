@@ -1,0 +1,11 @@
+{
+  "name": "wordsOutInJS",
+  "_cacheHeaders": {
+    "Content-Type": "text/html; charset=utf-8"
+  },
+  "main": "index",
+  "_source": "https://github.com/molnarland/wordsOutInJS",
+  "_target": "*",
+  "_originalSource": "https://github.com/molnarland/wordsOutInJS",
+  "_direct": true
+}

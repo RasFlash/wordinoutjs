@@ -1,0 +1,33 @@
+{
+  "name": "wordsOutInJS",
+  "homepage": "https://github.com/molnarland/wordsOutInJS",
+  "authors": [
+    "molnarland <rrmolnar@gmail.com>"
+  ],
+  "description": "Words Out In is a simulates typing with vanilla JavaScript.",
+  "main": "wordsoutin.min.js",
+  "moduleType": [],
+  "keywords": [
+    "type",
+    "script",
+    "js",
+    "javascript",
+    "words",
+    "out",
+    "in",
+    "simulate",
+    "type",
+    "vanilla",
+    "javascript",
+    "vanilla",
+    "js"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

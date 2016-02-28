@@ -1,5 +1,6 @@
 {
   "name": "wordsOutInJS",
+  "version": "1.0",
   "_cacheHeaders": {
     "Content-Type": "text/html; charset=utf-8"
   },
@@ -7,6 +8,5 @@
   "_source": "https://github.com/molnarland/wordsOutInJS",
   "_target": "*",
   "_originalSource": "https://github.com/molnarland/wordsOutInJS",
-  "_direct": true,
-  "version": "1.0.0"
+  "_direct": true
 }

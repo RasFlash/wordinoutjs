@@ -1,12 +1,10 @@
 {
   "name": "wordsOutInJS",
+  "version": "1.0",
   "homepage": "https://github.com/molnarland/wordsOutInJS",
   "authors": [
     "molnarland <rrmolnar@gmail.com>"
   ],
-  "dependencies": {
-    "wordsOutInJS": "~1.0.0"
-  },
   "description": "Words Out In is a simulates typing with vanilla JavaScript.",
   "main": "wordsoutin.min.js",
   "moduleType": ["globals"],

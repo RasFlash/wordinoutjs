@@ -3,9 +3,10 @@
   "_cacheHeaders": {
     "Content-Type": "text/html; charset=utf-8"
   },
-  "main": "index",
+  "main": "wordsOutInJS.min.js",
   "_source": "https://github.com/molnarland/wordsOutInJS",
   "_target": "*",
   "_originalSource": "https://github.com/molnarland/wordsOutInJS",
-  "_direct": true
+  "_direct": true,
+  "version": "~1.0.0"
 }

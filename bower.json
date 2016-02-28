@@ -4,6 +4,9 @@
   "authors": [
     "molnarland <rrmolnar@gmail.com>"
   ],
+  "dependencies": {
+      "wordsOutInJS": "~1.0.0"
+    },
   "description": "Words Out In is a simulates typing with vanilla JavaScript.",
   "main": "wordsoutin.min.js",
   "moduleType": ["globals"],
@@ -16,7 +19,7 @@
     "out",
     "in",
     "simulate",
-    "type",
+    "typed",
     "vanilla",
     "javascript",
     "vanilla",
@@ -24,11 +27,7 @@
   ],
   "license": "MIT",
   "ignore": [
-    "**/.*",
     "bower_components",
-    "prepos.cfg",
-    "example/*",
-    ".gitignore",
-    "wordsoutin.js"
+    "wordsoutin.min.js"
   ]
 }

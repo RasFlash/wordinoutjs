@@ -6,7 +6,7 @@
   ],
   "description": "Words Out In is a simulates typing with vanilla JavaScript.",
   "main": "wordsoutin.min.js",
-  "moduleType": [],
+  "moduleType": ["globals"],
   "keywords": [
     "type",
     "script",

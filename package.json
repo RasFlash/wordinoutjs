@@ -1,0 +1,37 @@
+{
+  "name": "wordsoutinjs",
+  "version": "1.0.3",
+  "description": "Words Out In is a simulates typing with vanilla JavaScript.",
+  "main": "wordsoutin.min.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/molnarland/wordsOutInJS.git"
+  },
+  "keywords": [
+    "type",
+    "script",
+    "js",
+    "javascript",
+    "words",
+    "out",
+    "in",
+    "simulate",
+    "type",
+    "vanilla",
+    "javascript",
+    "vanilla",
+    "js"
+  ],
+  "author": "molnarland <rrmolnar@gmail.com> (molnarland.github.io)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/molnarland/wordsOutInJS/issues"
+  },
+  "homepage": "https://github.com/molnarland/wordsOutInJS#readme"
+}

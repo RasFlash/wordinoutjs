@@ -5,8 +5,8 @@
     "molnarland <rrmolnar@gmail.com>"
   ],
   "dependencies": {
-      "wordsOutInJS": "~1.0.0"
-    },
+    "wordsOutInJS": "~1.0.0"
+  },
   "description": "Words Out In is a simulates typing with vanilla JavaScript.",
   "main": "wordsoutin.min.js",
   "moduleType": ["globals"],

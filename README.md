@@ -14,6 +14,22 @@ Inspireted me: [npmjs website](https://www.npmjs.org/) that my friend showed to 
 - Windows Phone 8.1 Explorer
 - Chrome in Android, Android Browser
 
+Install
+=========
+**GitHub**
+- [unminified]: https://raw.githubusercontent.com/molnarland/wordsOutInJS/master/wordsoutin.js
+- [minified]: https://raw.githubusercontent.com/molnarland/wordsOutInJS/master/wordsoutin.min.js
+
+**Bower**
+```
+bower install wordsOutInJS
+```
+
+**npm**
+```
+npm install wordsoutinjs
+```
+
 How to use
 =========
 **Add to HTML's head:**

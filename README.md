@@ -16,6 +16,9 @@ Inspireted me: [npmjs website](https://www.npmjs.org/) that my friend showed to 
 
 Install
 =========
+
+Using one of the ways and get library:
+
 **GitHub**
 - [unminified]: https://raw.githubusercontent.com/molnarland/wordsOutInJS/master/wordsoutin.js
 - [minified]: https://raw.githubusercontent.com/molnarland/wordsOutInJS/master/wordsoutin.min.js

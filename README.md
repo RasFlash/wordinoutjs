@@ -51,7 +51,7 @@ var element = document.getElementById('element');
 var words = ['JavaScript', 'PHP', 'MySQL'];
 var delay = 100; //how many milliseconds waiting two words write or delete between
 var inWait = 3; //you can add that how many step wait after a word writed (delay*inWait=how many milliseconds wait, so 100*3=300 ms wait)
-var color = "green"; //you can add that what's colors type out
+var color = 'green'; //you can add that what's colors type out
 var stop = true; //if true then timer will stop after write last word but if false then timer won't stop
 
 var WOI = new WordsOutIn(element, words, delay, inWait, color, stop); //call this object and running :)

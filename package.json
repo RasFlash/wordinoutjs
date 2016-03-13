@@ -1,6 +1,6 @@
 {
   "name": "wordsoutinjs",
-  "version": "1.0.3",
+  "version": "1.0.0",
   "description": "Words Out In is a simulates typing with vanilla JavaScript.",
   "main": "wordsoutin.min.js",
   "directories": {

@@ -13,13 +13,14 @@
 
 
         var element=document.getElementById('comeon');
-        var words=['JavaScript', 'PHP', 'MySQL'];
+        var words=['Script', 'Script', 'PHPStream', 'PHP.net', 'MySQL'];
         var delay=[[100,50]]; //how many milliseconds waiting two words write or delete between
         var inWait=[[1000, 600]]; //you can add that how many milliseconds wait after a word writed
         var colors=[['#0C0', 'blue'], ['pink', 'yellow'], ['tomato', 'purple']]; //change write and delete font colors but if that false then doesn't change
+        var retype=false //if false then current word not delete full if next word a part equals with current but if true then delete full word everytime
         var stop=true; //if true then timer will stop after write last word but if false then timer won't stop
 
-        var WOI = new WordsOutIn(element, words, delay, inWait, colors, stop); //call this object and running :)
+        var WOI = new WordsOutIn(element, words, delay, inWait, colors, retype, stop); //call this object and running :)
 
     </script>
 </body>

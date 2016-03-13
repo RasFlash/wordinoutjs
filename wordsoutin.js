@@ -11,7 +11,7 @@
 
 
 
-function WordsOutIn(where, words, delay, inWait, color, stop)
+function WordsOutIn(where, words, delay, inWait, color, retype, stop)
 {
 
     //options start
@@ -20,6 +20,7 @@ function WordsOutIn(where, words, delay, inWait, color, stop)
     this.delay=delay=this.createDelayOrWaitArray(delay, this.words.length, 'number') || this.createDelayOrWaitArray(200, this.words.length, 'number'); //how many milliseconds waiting two words write or delete between
     this.inWait=inWait=this.createDelayOrWaitArray(inWait, this.words.length, 'number') || this.createDelayOrWaitArray(0, this.words.length, 'number'); //if writed then how many milliseconds waiting
     this.colors=color=this.createDelayOrWaitArray(color, this.words.length, 'string') || this.createDelayOrWaitArray(false, this.words.length, 'string');
+    this.fullRetype=retype || false; //if false then current word not delete full if next word a part equals with current but if true then delete full word everytime
     this.stop=stop || false; //if true then timer will stop after write last word but if false then timer won't stop
     //options stop
 
@@ -36,7 +37,7 @@ function WordsOutIn(where, words, delay, inWait, color, stop)
     }, this.delay[0][0]);
 
     this.wordCounter=this.db=this.wait=0;
-    this.is=false;
+    this.is=this.fastStop=false;
 
     this.doing=function(timer){
         var wordCounter=this.wordCounter,
@@ -47,20 +48,54 @@ function WordsOutIn(where, words, delay, inWait, color, stop)
             words=this.words,
             inWait=this.inWait,
             delay=this.delay,
-            colors=this.colors;
+            colors=this.colors,
+            fastStop=this.fastStop,
+            nextWord='';
 
-        if(db == words.length && !is && wait == 0){
-            db=0;
+        if (!this.fullRetype && is) {
+
+             if(words[db+1] != undefined){
+                for (var cv = 0; cv < element.length; cv++){
+                    if (words[db+1][cv] == undefined) break;
+                    nextWord += words[db+1][cv];
+                }
+
+                if (element == nextWord) {
+                    if(element.length != words[db+1].length){
+                        is = null;
+                        wait = 0;
+                        db++;
+                        fastStop = true;
+                    }
+                }
+             }
+            else{
+                for (var cv = 0; cv < element.length; cv++){
+                    if (words[0][cv] == undefined) break;
+                    nextWord += words[0][cv];
+                }
+
+                if (element == nextWord) {
+                    if(element.length != words[0].length){
+                        is = null;
+                        wait = db = 0;
+                        fastStop = true;
+                    }
+                }
+            }
         }
-        else if (element.length == 0 && is==null && wait == 0) {
+
+        if(db == words.length && !is && wait == 0)
+            db=0;
+        else if ((fastStop || element.length == 0) && is==null && wait == 0) {
             timer=this.stopAndStartTimer(where, inWait[db][0], this);
             wait++;
         }
-        else if (element.length == 0 && is==null && wait > 0) {
+        else if ((fastStop || element.length == 0) && is==null && wait > 0) {
             this.changeFontColor(this.where, colors[db][0]);
             if(wait >= 2){
                 wait=0;
-                is=false;
+                is=fastStop=false;
                 timer=this.stopAndStartTimer(where, delay[db][0], this);
             }
             else wait++;
@@ -109,6 +144,7 @@ function WordsOutIn(where, words, delay, inWait, color, stop)
         this.words=words;
         this.inWait=inWait;
         this.delay=delay;
+        this.fastStop=fastStop;
 
         return element;
     };
